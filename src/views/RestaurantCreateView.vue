@@ -9,7 +9,7 @@ import { defineComponent } from 'vue';
 import createRestaurant from '../components/createRestaurant.vue';
 
 export default defineComponent({
-  name: 'HomeView',
+  name: 'RestaurantCreateView',
   components: {
     createRestaurant
   },
