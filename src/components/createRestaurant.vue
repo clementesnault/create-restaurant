@@ -36,15 +36,15 @@
     ></v-text-field>
 
     <v-row>
-      <v-col class="ma-auto">
-        <h4>Heure d'ouverture</h4>
-        <Datepicker v-model="datas.openingTime" time-picker/>
-      </v-col>
-      <v-col class="ma-auto">
-        <h4>Heure de fermueture</h4>
-        <Datepicker v-model="datas.closingTime" time-picker/>
-      </v-col>
-    </v-row><br/>
+        <v-col class="ma-auto">
+          <label for="resto">Heure d'ouverture</label><br/>
+          <input type="time" v-model="datas.openingTime" min="00:00" max="23:59" required>
+        </v-col>
+        <v-col class="ma-auto">
+          <label for="resto">Heure de fermeture</label><br/>
+          <input type="time" v-model="datas.closingTime" min="00:00" max="23:59" required>
+        </v-col>
+      </v-row><br />
 
 
     <v-text-field
@@ -90,19 +90,17 @@
 
 <script>
 import axios from 'axios'
-import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
-  components: { Datepicker },
   data () {
     return {
         valid: true,
         datas: {
           name: '',
           address: '',
-          openingTime: null,
-          closingTime: null,
+          openingTime: '',
+          closingTime: '',
           type: '',
           image: '',
         }
@@ -117,8 +115,8 @@ export default {
         var postData= {
           name: this.datas.name,
           address: this.datas.address,
-          openingTime: new Date(((((this.datas.openingTime.hours * 60) + this.datas.openingTime.minutes) * 60) + this.datas.openingTime.seconds) * 1000).toUTCString(),
-          closingTime: new Date(((((this.datas.closingTime.hours * 60) + this.datas.openingTime.minutes) * 60) + this.datas.openingTime.seconds) * 1000).toUTCString(),
+          openingTime: this.datas.openingTime,
+          closingTime: this.datas.closingTime,
           type: this.datas.type,
           image: this.datas.image,
         }
@@ -132,7 +130,7 @@ export default {
     },
   async created() 
   {
-    axios.get('http://127.0.0.1:8000/restaurant/displayRestaurant/', {
+    axios.get("http://127.0.0.1:8000/restaurant/displayAllRestaurant/", {
             headers: {
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": "*",
