@@ -66,7 +66,7 @@
         <v-btn
           color="success"
           class="mr-4"
-          @click="validate"
+          @click="validate, snackbar = true"
           style="width:150px"
         >
           Valider
@@ -84,7 +84,28 @@
     </v-row>
 
   </v-form>
-  </v-card>       
+
+  <div class="text-center ma-2">
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ text }}
+
+      <template v-slot:actions>
+        <v-btn
+          color="pink"
+          variant="text"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
+  </v-card> 
+  
+  
+  
 </template>
 
 
@@ -103,7 +124,9 @@ export default {
           closingTime: '',
           type: '',
           image: '',
-        }
+        },
+        snackbar: false,
+        text: `Création de restaurant validée`,
       }
   },
   methods: {
