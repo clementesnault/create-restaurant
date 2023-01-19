@@ -117,8 +117,8 @@ export default {
         var postData= {
           name: this.datas.name,
           address: this.datas.address,
-          openingTime: Date.parse(this.datas.openingTime),
-          closingTime: Date.parse(this.datas.closingTime),
+          openingTime: new Date(((((this.datas.openingTime.hours * 60) + this.datas.openingTime.minutes) * 60) + this.datas.openingTime.seconds) * 1000).toUTCString(),
+          closingTime: new Date(((((this.datas.closingTime.hours * 60) + this.datas.openingTime.minutes) * 60) + this.datas.openingTime.seconds) * 1000).toUTCString(),
           type: this.datas.type,
           image: this.datas.image,
         }
@@ -132,7 +132,7 @@ export default {
     },
   async created() 
   {
-    axios.get('http://127.0.0.1:8000/restaurant/registerRestaurant/', {
+    axios.get('http://127.0.0.1:8000/restaurant/displayRestaurant/', {
             headers: {
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": "*",
