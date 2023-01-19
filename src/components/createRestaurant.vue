@@ -97,7 +97,7 @@
           variant="text"
           @click="snackbar = false"
         >
-          Close
+          Fermer
         </v-btn>
       </template>
     </v-snackbar>
